@@ -1,70 +1,57 @@
+
+import java.time.Year;
 import java.util.ArrayList;
 import java.util.Scanner;
+
 public class q3_salary {
+    static StringBuilder sb = new StringBuilder();
     static Scanner sc = new Scanner(System.in);
+
     // test
-    // 0 u0 100000 2014 2.34
-    // 1 u1 100000 2010 2.34
-    // 2 u2 200000 2014 2.34
+    // 0 u0 2014 2.34
+    // 1 u1 2010 2.34
+    // 2 u2 2019 2.34
     public static void main(String[] args) {
+        int now = Year.now().getValue();
+        double basicSalary = 5000000;
+        double increaseYearly = 0.1;
 
-        System.out.println("Enter current year: ");
-        int now = sc.nextInt();
+        System.out.println("Current year: " + now);
+        System.out.println("Basic salary: " + basicSalary);
+        System.out.println("Salary coefficient increase yearly: " + increaseYearly);
 
-        ArrayList<Salary> salaries = new ArrayList<>();
+        ArrayList<Employee> employees = new ArrayList<>();
 
         System.out.println("numbers of employees: ");
-        int N = sc.nextInt();
+        int N = sc.nextInt(); //3
         sc.nextLine();
-        System.out.println("form: code name basicSalary start salaryCoefficient");
+        System.out.println("form: id   name   start   salaryCoefficient");
 
         for (int i = 0; i < N; i++) {
-            System.out.println("person "+i);
-            String code = sc.next();
+            System.out.println("person " + (i+1));
+            String id = sc.next();
             String name = sc.next();
-            double basicSalary = sc.nextDouble();
-
             int start = sc.nextInt();
-            int numOfYear = numOfYear(start, now);
             double salaryCoefficient = sc.nextDouble();
-            double income = income(salaryCoefficient, basicSalary, numOfYear);
 
-            Salary salary = new Salary(code, name, income);
-            salaries.add(salary);
+            Employee employee = new Employee(id, name, start, salaryCoefficient, increaseYearly);
+            employees.add(employee);
         }
 
         System.out.println("----------------- List----------------");
-        for (Salary salary: salaries) {
-            System.out.println(salary);
+        for (Employee employee : employees) {
+            System.out.println(employee);
         }
-        
-        System.out.println("person have the highest income is: "+getMaxIncome(salaries));
-        
-        for (int i = salaries.size()-1 ; i > -1 ; i--) {
-            Salary salary = salaries.get(i);
-            System.out.println(salary);
+
+        employees.sort((s1, s2) -> {
+            return Double.compare(s2.getIncome(basicSalary, now), s1.getIncome(basicSalary, now));
+        });
+
+        for (int i = 0 ; i <employees.size() ; i++) {
+            Employee employee = employees.get(i);
+            sb = sb.append(employee).append("income ="+employee.getIncome(basicSalary, now)).append("\n");  
         }
-    }
-
-    public  static int numOfYear (int start, int now){
-        return now - start;
-    }
-    public static double salaryCoefficientFixed(double salaryCoefficient, int numOfYear) {
-          return (salaryCoefficient + 0.01 * numOfYear);
-    }
-
-    public static double income(double salaryCoefficient, double basicSalary, int numOfYear) {
-        double salary = salaryCoefficientFixed(salaryCoefficient,numOfYear) * basicSalary;
-        return salary;
-    }
-
-    public static Salary getMaxIncome (ArrayList<Salary> salaries ){
-        Salary temp = salaries.get(0);
-        for (int i = 0; i < salaries.size(); i++) {
-            if(temp.getIncome()< salaries.get(i).getIncome())
-            temp = salaries.get(i); 
-        }
-        return temp;
+        System.out.println(sb);
     }
 
 }
