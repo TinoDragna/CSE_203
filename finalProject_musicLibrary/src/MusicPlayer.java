@@ -9,7 +9,7 @@ public class MusicPlayer extends Song{
     public MusicPlayer() {
         this.playList = null;
         this.currentSong = -1;
-        this.volume = 10;
+        this.volume = 5;
     }
 
     public MusicPlayer(ArrayList<Song> playList, int currentSong, double volume) {
