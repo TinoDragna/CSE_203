@@ -59,7 +59,7 @@ public class FinalExam extends GradedActivity
    @Override
    public String toString() {
       return "\n"+ "FinalExam [numQuestions=" + numQuestions + ", pointsEach=" + pointsEach + ", numMissed= " + numMissed
-            +" finalScore= " +numericScore+ "]" ;
+            +" finalScore= " +getScore()+ "]" ;
    }
 
    
