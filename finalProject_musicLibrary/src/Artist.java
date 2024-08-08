@@ -1,24 +1,21 @@
+import java.util.*;
+
 public class Artist {
     private String name;
-    private String imagePath;
-    private int follower;
-    private Album albums;
+    private List<Album> albums;
 
     public Artist() {
-        this.name = null;
-        this.imagePath = null;
-        this.follower = 0;
-        this.albums = null;
     }
 
-    public Artist(String name, String imagePath, int follower, Album albums) {
+    public Artist(String name) {
         this.name = name;
-        this.imagePath = imagePath;
-        this.follower = follower;
-        this.albums = albums;
+        this.albums = new ArrayList<>();
     }
 
-    
+    @Override
+    public String toString() {
+        return "Artist [name=" + name + ", albums=" + albums + "]";
+    }
 
     public String getName() {
         return name;
@@ -28,29 +25,12 @@ public class Artist {
         this.name = name;
     }
 
-    public String getImagePath() {
-        return imagePath;
-    }
-
-    public void setImagePath(String imagePath) {
-        this.imagePath = imagePath;
-    }
-
-    public int getFollower() {
-        return follower;
-    }
-
-    public void setFollower(int follower) {
-        this.follower = follower;
-    }
-
-    public Album getAlbums() {
+    public List<Album> getAlbums() {
         return albums;
     }
 
-    public void setAlbums(Album albums) {
+    public void setAlbums(List<Album> albums) {
         this.albums = albums;
     }
-    
 
 }
