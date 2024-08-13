@@ -3,10 +3,13 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
 public class UI {
-    private JTextField textField1;
     private JPanel panel1;
     private JTextField textField2;
-    private JButton button1;
+    private JSlider slider1;
+    private JButton button2;
+    private JFormattedTextField formattedTextField1;
+    private JTable table1;
+    private JTextPane textPane1;
 
     public UI() {
         panel1.addMouseListener(new MouseAdapter() {
